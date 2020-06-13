@@ -11,7 +11,27 @@ const cartContent = document.querySelector('.cart-content');
 const productsDOM = document.querySelector('.products-center'); 
 
 
+//cart
+let cart = []; 
 
 
+//getting products
+class Products {
+    
+}
 
+//display products
+class UI  {
 
+}
+
+//local storage 
+
+class Storage {
+
+}
+
+document.addEventListener("DOMCoententLoaded", ()=> {
+    const ui  = new UI(); 
+    const products = new Products(); 
+})
