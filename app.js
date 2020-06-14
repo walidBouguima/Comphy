@@ -116,7 +116,7 @@ class UI  {
             <h5>$${item.price}</h5>
             <span class="remove-item" data-id="${item.id}">Remove</span>
         </div>
-        <div>
+        <div class="chevrons">
             <i class="fas fa-chevron-up data-id="${item.id}"></i>
             <p class="item-amount">${item.amount}</p>
             <i class="fas fa-chevron-down data-id="${item.id}"></i>
@@ -128,11 +128,17 @@ class UI  {
         cartOverlay.classList.add('transparentBcg'); 
         cartDOM.classList.add('showCart')
     }
+    hideCart(){
+        cartOverlay.classList.remove('transparentBcg'); 
+        cartDOM.classList.remove('showCart')
+    }
     setupAPP(){
 
         cart = Storage.getCart();
         this.setCartValues(cart);
-        this.populate(cart); 
+        this.populateCart(cart); 
+        cartBtn.addEventListener('click', this.showCart); 
+        closeCartBtn.addEventListener('click', this.hideCart)
     }
     populateCart(cart){
         cart.forEach(item =>
