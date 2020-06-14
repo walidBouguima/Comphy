@@ -149,6 +149,21 @@ class UI  {
         clearCartBtn.addEventListener('click', ()=> {
             this.clearCart();    
         });
+        //cart functionality with event bubbling on the contnet to target diffrent sub events
+
+        cartContent.addEventListener('click', event => {
+           if(event.target.classList.contains('remove-item'))
+           {
+               let removeItem = event.target; 
+               console.log(removeItem)
+               let id = removeItem.dataset.id; 
+               //remove from DOM by accessing the grand parent
+              cartContent.removeChild
+              (removeItem.parentElement.parentElement.parentElement); 
+               //remove from cart
+               this.removeItem(id);                
+           }
+        });
     }
     //clear cart button 
     clearCart(){
@@ -175,7 +190,6 @@ class UI  {
 }
 
 //local storage 
-
 class Storage {
     static saveProducts(products){
         localStorage.setItem("products", JSON.stringify(products))
