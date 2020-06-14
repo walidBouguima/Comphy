@@ -72,7 +72,7 @@ class UI  {
             if(inCart){
                 button.innerText = "In Cart"; 
                 button.disabled = true
-            }else{
+            }
                 button.addEventListener('click', (event)=> {
                     event.target.innerText = "In Cart"; 
                     event.target.disabled = true; 
@@ -87,7 +87,7 @@ class UI  {
                     //dipaly cart item 
                     // show the cart
                 })
-            }
+            
         })
     }
 }
@@ -100,7 +100,7 @@ class Storage {
     } 
     static getProduct(id){
         let products = JSON.parse(localStorage.getItem('products')); 
-        return products.find(product => product.id = id); 
+        return products.find(product => product.id === id); 
     }
 }
 
