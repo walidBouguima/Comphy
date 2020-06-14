@@ -118,9 +118,9 @@ class UI  {
             <span class="remove-item" data-id="${item.id}">Remove</span>
         </div>
         <div class="chevrons">
-            <i class="fas fa-chevron-up data-id="${item.id}"></i>
+            <i class="fas fa-chevron-up" data-id="${item.id}"></i>
             <p class="item-amount">${item.amount}</p>
-            <i class="fas fa-chevron-down data-id="${item.id}"></i>
+            <i class="fas fa-chevron-down" data-id="${item.id}"></i>
         </div>
     </div>`; 
     cartContent.appendChild(div); 
@@ -162,6 +162,35 @@ class UI  {
               (removeItem.parentElement.parentElement.parentElement); 
                //remove from cart
                this.removeItem(id);                
+           }
+           else if(event.target.classList.contains('fa-chevron-up')){
+                let addAmount = event.target; 
+                console.log(addAmount)
+                let id = addAmount.dataset.id; 
+                console.log(id)
+                let tempItem = cart.find(item => item.id ===id);
+                //Original cart array is updated at this point
+                tempItem.amount += 1; 
+                console.log(tempItem.amount); 
+                Storage.saveCart(cart);
+                this.setCartValues(cart);  
+                //update the amount text on the UI with the temItem value
+                addAmount.nextElementSibling.innerText = tempItem.amount; 
+           }
+           else if(event.target.classList.contains('fa-chevron-down')){
+               let lowerAmount = event.target; 
+               let id = lowerAmount.dataset.id; 
+               let tempItem = cart.find(item => item.id === id); 
+
+               tempItem.amount -= 1; 
+               if(tempItem.amount > 0){
+                   Storage.saveCart(cart);
+                   this.setCartValues(cart); 
+                   lowerAmount.previousElementSibling.innerText = tempItem.amount; 
+                }else {
+                   cartContent.removeChild(lowerAmount.parentElement.parentElement.parentElement); 
+                   this.removeItem(id); 
+               }
            }
         });
     }
