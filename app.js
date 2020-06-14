@@ -92,6 +92,7 @@ class UI  {
                     
                 })
         })
+
     }
 
     setCartValues(cart){
@@ -144,6 +145,33 @@ class UI  {
         cart.forEach(item =>
             this.addCartItem(item))
     }
+    cartLogic(){
+        clearCartBtn.addEventListener('click', ()=> {
+            this.clearCart();    
+        });
+    }
+    //clear cart button 
+    clearCart(){
+        let cartItems = cart.map(item => item.id);
+        cartItems.forEach(id =>  this.removeItem(id)); 
+        while(cartContent.children.length > 0){
+            cartContent.removeChild(cartContent.children[0])
+            console.log(cartContent.children)
+        }
+        this.hideCart();
+    }
+    //general clear function
+    removeItem(id){
+        cart = cart.filter(item => item.id !== id); 
+        this.setCartValues(cart);
+        Storage.saveCart(cart);
+        let button = this.getSingleButton(id); 
+        button.disabled = false; 
+        button.innerHTML = `<i class="fas fa-shopping-cart"></i>Add to bag` 
+    }
+    getSingleButton(id){
+        return buttonsDOM.find(button => button.dataset.id === id); 
+    }
 }
 
 //local storage 
@@ -175,5 +203,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
         Storage.saveProducts(products)
      }).then(()=> {
          ui.getBagButtons();
+         ui.cartLogic(); 
      }); 
 })
