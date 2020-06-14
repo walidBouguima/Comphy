@@ -88,6 +88,8 @@ class UI  {
                     //dipaly cart item 
                     this.addCartItem(cartItem)
                     // show the cart
+                    this.showCart(cart)
+                    
                 })
         })
     }
@@ -112,7 +114,7 @@ class UI  {
         <div>
             <h4>${item.title}</h4>
             <h5>$${item.price}</h5>
-            <span class="remove-item" data-id="${item.id}>Remove</span>
+            <span class="remove-item" data-id="${item.id}">Remove</span>
         </div>
         <div>
             <i class="fas fa-chevron-up data-id="${item.id}"></i>
@@ -121,7 +123,10 @@ class UI  {
         </div>
     </div>`; 
     cartContent.appendChild(div); 
-    console.log(cartContent)
+    }
+    showCart(){
+        cartOverlay.classList.add('transparentBcg'); 
+        cartDOM.classList.add('showCart')
     }
 }
 
