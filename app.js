@@ -63,7 +63,22 @@ class UI  {
     getBagButtons(){
 
         const buttons = [...document.querySelectorAll('.bag-btn')];
-        console.log(buttons)
+        buttons.forEach(button => {
+            let id = button.dataset.id;
+            let inCart = cart.find(item => item.id === id); 
+            if(inCart){
+                button.innerText = "In Cart"; 
+                button.disabled = true
+            }else{
+                button.addEventListener('click', (event)=> {
+                    event.target.innerText = "In Cart"; 
+                    event.target.disabled = true; 
+                    ///get product from products 
+                    //add product to the cart
+                    //save cart in local storage 
+                })
+            }
+        })
     }
 }
 
